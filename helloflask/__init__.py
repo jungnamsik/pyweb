@@ -30,6 +30,7 @@ def reqenv() :
         ss += "<tr><td>{}</td><td>{}</td></tr>".format(x, request.environ[x])
     ss += "</table>"
 
+
     return make_response(ss)
     # return [x for x in request.environ ]
     # return ('REQUEST_METHOD: %(REQUEST_METHOD) s <br>'
