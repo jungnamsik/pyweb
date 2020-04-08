@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, g, make_response, request, Response
-from datetime import datetime, date
+from flask import session
+from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 app.debug = True
 # app.config["SERVER_NAME"] = 'local.com:5000'
 
+app.config.update (
+    SECRET_KEY = 'X123vkdltjs!!'
+    ,SESSION_COOKIE_NAME='pyweb_flask_session'
+    ,PERMANENT_SESSION_LIFETIME=timedelta(1)
+)
 
 @app.route("/wc")
 #localhost:5000/wc?key=token&val=abc
@@ -14,6 +20,8 @@ def wc() :
     val = request.args.get("val")
     res = Response("Set Cookie")
     res.set_cookie(key, val)
+    session['Token'] = '123X'
+
     return make_response(res)
 
 @app.route("/rc")
@@ -21,7 +29,16 @@ def wc() :
 def rg () :
     key = request.args.get("key")
     val = request.cookies.get(key)
-    return "Cookie:[{}]:[{}]".format(key, val)
+    ss = session.get('Token')
+    return "Cookie:[{}]:[{}]-session[{}]".format(key, val, ss)
+
+@app.route('/delsess')
+def delsess():
+    if session.get('Token'):
+        del session['Token']
+    return "Session이 삭제되었습니다!"
+
+
 
 @app.route("/reqenv")
 def reqenv() :
