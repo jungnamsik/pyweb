@@ -5,10 +5,10 @@ from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 app.debug = True
-# app.config["SERVER_NAME"] = 'local.com:5000'
+# app.config["SERVER_NAME"] = 'local.com:5000' 
 
 app.config.update (
-    SECRET_KEY = 'X123vkdltjs!!'
+    SECRET_KEY = 'X123vkdltjs!!$$'
     ,SESSION_COOKIE_NAME='pyweb_flask_session'
     ,PERMANENT_SESSION_LIFETIME=timedelta(1)
 )
