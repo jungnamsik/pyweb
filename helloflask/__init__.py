@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, g, make_response, request, Response
-from flask import session
+from flask import session, render_template
 from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
@@ -12,6 +12,10 @@ app.config.update (
     ,SESSION_COOKIE_NAME='pyweb_flask_session'
     ,PERMANENT_SESSION_LIFETIME=timedelta(1)
 )
+
+@app.route("/tmpl")
+def tmpl() :
+    return render_template("index.html", title='test!!') 
 
 @app.route("/wc")
 #localhost:5000/wc?key=token&val=abc
